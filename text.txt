@@ -1,1 +1,4 @@
-setup is ok.
+git init
+
+git branch
+
