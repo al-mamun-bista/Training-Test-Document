@@ -17,16 +17,42 @@ class ProductGroup(models.Model):
     _description = 'Product Group'
 
     name = fields.Char(string='Product Name')
+    group = fields.Char(string='Product Group')
 
 
 class ProductGroupLine(models.Model):
     _name = 'product.group.line'
     _description = 'Product Group Line'
     _rec_name = 'name_id'
+    _sql_constraints = [
+        ('short_code_uniq', 'unique (short_code)', 'Short Code exists!')
+    ]
 
     name_id = fields.Many2one('product.group', string='Product Name')
     short_code = fields.Char(string='Short Code')
 
     product_group_id = fields.Many2one('parent.group', string='Product Under')
+
+    @api.model
+    def create(self, values):
+        code_str = values['short_code']
+        code_num = code_str[3::]
+        if code_str[0:3] != 'pg-':
+            raise UserError(_('Invalid input. Please start with "pg-"'))
+        if code_num.isnumeric() == False:
+            raise UserError(_('Invalid input. Insert number after "pg-"'))
+        else:
+            return super(ProductGroupLine, self).create(values)
+    
+    def write(self, values):
+        if 'short_code' in values.keys():
+            code_str = values['short_code']
+            code_num = code_str[3::]
+            if code_str[0:3] != 'pg-':
+                raise UserError(_('Invalid input. Please start with "pg-"'))
+            if code_num.isnumeric() == False:
+                raise UserError(_('Invalid input. Insert number after "pg-"'))
+            else:
+                return super(ProductGroupLine, self).write(values)
 
 
