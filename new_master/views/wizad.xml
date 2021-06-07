@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <record id="purchase_filter_inherit_form" model="ir.ui.view">
+        <field name="name">purchase.filter.form</field>
+        <field name="model">purchase.filter</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="add_date"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_filter_purchase_submenu" model="ir.actions.act_window">
+        <field name="name">Filter Purchase Order</field>
+        <field name="res_model">purchase.filter</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+            id="menu_product_submenu"
+            action="action_filter_purchase_submenu"
+            name="Filter Purchase Order"
+            parent="purchase.menu_purchase_root"
+            sequence='23'
+            />
+
+
+</odoo> 

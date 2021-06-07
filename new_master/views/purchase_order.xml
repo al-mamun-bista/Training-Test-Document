@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="purchase_inherit_line_kaushik" model="ir.ui.view" >
+        <field name="name">purchase.inherit.kaushik</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">  
+
+            <xpath expr="//field[@name='date_order']" position='after'>
+                <field name="product_group"/>
+            </xpath> 
+            <xpath expr="//field[@name='product_group']" position='before'>
+                <field name="active_group_filter"/>
+            </xpath> 
+        </field>
+    </record>
+     <record id="view_barcode_to_product_views" model="ir.ui.view">
+        <field name="name">product.template.new.kaushik</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='default_code']" position='before'>
+                <field name="group"/>
+            </xpath> 
+        </field>
+    </record>
+</odoo>
