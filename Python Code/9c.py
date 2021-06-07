@@ -1,14 +1,14 @@
-d={}
-n = int(input("Enter number of elements : "))
-d = [ map(str,input().split()) for x in range(n)]
-lst = []
+n = int(input("enter a n value:"))
+d = {}
 
-for key,val in d:
-    lst.append(key)
+for i in range(n):
+    keys = input() 
+    values = int(input()) 
+    d[keys] = values
 
-lst.sort(reverse=True)
+print(d)
 
-for i in lst:
-    for key, val in d:
-        if key == i:
-            print(key, val)
+d_n = sorted(d.items(),reverse=True)
+d=dict(d_n) 
+
+print(d)

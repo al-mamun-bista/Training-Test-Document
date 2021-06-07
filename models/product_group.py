@@ -1,6 +1,7 @@
 from odoo import api, models, fields, _
 from odoo.exceptions import UserError
-
+from odoo.exceptions import ValidationError
+import re
 
 class ParentGroup(models.Model):
     _name = 'parent.group'
@@ -54,5 +55,30 @@ class ProductGroupLine(models.Model):
                 raise UserError(_('Invalid input. Insert number after "pg-"'))
             else:
                 return super(ProductGroupLine, self).write(values)
+
+
+class ProductTemplateInherit(models.Model):
+    _inherit = 'product.template'
+
+    group_ids = fields.Many2one('product.group', string='Group')
+    rating = state = fields.Selection([('1', '1 Star'), 
+                ('2', '2 Star'),
+                ('3', '3 Star'),
+                ('4', '4 Star'),
+                ('5', '5 Star')], 
+                default='1', string='Rating')
+
+
+# class ResPartnerInherit(models.Model):
+#     _inherit = 'res.partner'
+
+#     email_custom = fields.Char(string='Email')
+
+#     @api.onchange('email_custom')
+#     def validate_mail(self):
+#         if self.email_custom:
+#             match = re.match('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$', self.email_custom)
+#             if match == None:
+#                 raise ValidationError('Not a valid E-mail ID')
 
 

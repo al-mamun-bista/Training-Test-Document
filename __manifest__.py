@@ -4,7 +4,7 @@
     'sequence' : 1,
     'summary': 'Bista Product Group Summary',
     'description' : 'Bista Product Group Description.',
-    'depends' : ['base', 'purchase', 'sale_management'],
+    'depends' : ['base', 'purchase', 'sale_management','stock'],
     'data' : [
         'security/product_group_security.xml',
         'security/ir.model.access.csv',

@@ -56,25 +56,64 @@
         </field>
     </record>
 
-    <!-- <record id="view_bista_product_group_line_product_search" model="ir.ui.view">
-        <field name="name">product.group.line.search</field>
-        <field name="model">parent.group.line</field>
-        <field name="arch" type="xml">
-            <search>
-                <field name="short_code"/>
-            </search>
+    <record id='view_inherit_purchase_extend' model='ir.ui.view'>
+        <field name='name'>purchase.order.purchase.extend.inherit</field>
+        <field name='model'>purchase.order</field>
+        <field name='inherit_id' ref='purchase.purchase_order_form'/>
+        <field name='arch' type='xml'>
+            <xpath expr='//field[@name="partner_id"]' position='attributes'>
+                <attribute name='domain'>[('is_company','=',True)]</attribute>
+            </xpath>
+        </field>
+    </record>
+    
+    <record id='view_inherit_purchase_extend_sail' model='ir.ui.view'>
+        <field name='name'>sale.order.purchase.extend.inherit</field>
+        <field name='model'>sale.order</field>
+        <field name='inherit_id' ref='sale.view_order_form'/>
+        <field name='arch' type='xml'>
+            <xpath expr='//field[@name="partner_id"]' position='attributes'>
+                <attribute name='domain'>[('is_company','=',True)]</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id='view_sale_product_inherit' model='ir.ui.view'>
+        <field name='name'>product.template.sale.product.inherit</field>
+        <field name='model'>product.template</field>
+        <field name='inherit_id' ref='product.product_template_only_form_view'/>
+        <field name='arch' type='xml'>
+            <xpath expr='//field[@name="default_code"]' position='before'>
+                <field name='group_ids'/>
+                <field name='rating' widget='radio' />
+            </xpath>
+        </field>
+    </record>
+
+    <!-- <record id='view_customer_inherit' model='ir.ui.view'>
+        <field name='name'>res.partner.sale.product.inherit</field>
+        <field name='model'>res.partner</field>
+        <field name='inherit_id' ref='base.view_partner_form'/>
+        <field name='arch' type='xml'>
+            <xpath expr='//field[@name="email"]' position='attributes'>
+                <attribute name='invisible'>1</attribute>
+            </xpath>
+            <xpath expr='//field[@name="website"]' position='before'>
+                <field name='email_custom'/>
+            </xpath>
         </field>
     </record> -->
 
-    <!-- <record id="view_bista_product_group_product_search" model="ir.ui.view">
-        <field name="name">product.group.search</field>
-        <field name="model">parent.group</field>
-        <field name="arch" type="xml">
-            <search>
-                <field name="name"/>
-            </search>
+    <record id='view_product_template_inherit_search' model='ir.ui.view'>
+        <field name='name'>product.template.inherit.search</field>
+        <field name='model'>product.template</field>
+        <field name='inherit_id' ref='product.product_template_search_view'/>
+        <field name='arch' type='xml'>
+            <xpath expr='//search' position='inside'>
+                <filter string='Rating' name='group_by_rating' context='{"group_by":"rating"}'/>
+            </xpath>
         </field>
-    </record> -->
+    </record>
 
     <record id="action_bista_product_group" model="ir.actions.act_window">
         <field name="name">Parent Group</field>
@@ -92,5 +131,12 @@
         name='Parent Group'
         parent='menu_bista_product_group_main'
         sequence='1'/>
+
+    <menuitem 
+        id='menu_bista_product_group_stock' 
+        action='action_bista_product_group' 
+        name='Custom Parent Group'
+        parent='stock.menu_stock_config_settings'
+        sequence='101'/>
 
 </odoo>
