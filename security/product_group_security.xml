@@ -2,7 +2,7 @@
 <odoo>
 
     <record id='product_group_user_access' model='ir.module.category'>
-        <field name='name'>Product Group</field>
+        <field name='name'>Bista Product Group</field>
         <field name='sequence'>1</field>
     </record>
 

@@ -1,4 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
+    <record id="view_bista_product_group_tree" model="ir.ui.view">
+        <field name="name">parent.group.tree</field>
+        <field name="model">parent.group</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="parent_group"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_bista_product_group_form" model="ir.ui.view">
+        <field name="name">parent.group.form</field>
+        <field name="model">parent.group</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="parent_group"/>
+                    </group>
+                    <notebook>
+                        <page string='Product Group'>
+                            <field name="product_group_line">
+                                <tree editable='bottom'>
+                                    <field name="name_id" required="True"/>
+                                    <field name="short_code" required="True"/>
+                                    <field name="product_group_id" invisible='1'/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <group>
+                                            <field name="name_id"/>
+                                        </group>
+                                        <group>
+                                            <field name="short_code"/>
+                                        </group>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_bista_product_group_parent_search" model="ir.ui.view">
+        <field name="name">parent.group.search</field>
+        <field name="model">parent.group</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="parent_group"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- <record id="view_bista_product_group_line_product_search" model="ir.ui.view">
+        <field name="name">product.group.line.search</field>
+        <field name="model">parent.group.line</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="short_code"/>
+            </search>
+        </field>
+    </record> -->
+
+    <!-- <record id="view_bista_product_group_product_search" model="ir.ui.view">
+        <field name="name">product.group.search</field>
+        <field name="model">parent.group</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+            </search>
+        </field>
+    </record> -->
+
+    <record id="action_bista_product_group" model="ir.actions.act_window">
+        <field name="name">Parent Group</field>
+        <field name="res_model">parent.group</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem 
+        id='menu_bista_product_group_main'
+        name='Bista Product Group'/>
+
+    <menuitem 
+        id='menu_bista_product_group' 
+        action='action_bista_product_group' 
+        name='Parent Group'
+        parent='menu_bista_product_group_main'
+        sequence='1'/>
+
 </odoo>
