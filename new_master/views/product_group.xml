@@ -81,19 +81,6 @@
             sequence='101'
             />
 
-<record id="action_filter_purchase_submenu" model="ir.actions.act_window">
-        <field name="name">Filter Purchase Order</field>
-        <field name="res_model">purchase.filter</field>
-        <field name="view_mode">tree,form</field>
-    </record>
-
-    <menuitem
-            id="menu_product_submenu"
-            action="action_filter_purchase_submenu"
-            name="Filter Purchase Order"
-            parent="purchase.menu_purchase_root"
-            sequence='23'
-            />
 
  	        
 <record id="action_product_group_addon" model="ir.actions.act_window">

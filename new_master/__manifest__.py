@@ -7,6 +7,8 @@
     'description' : "Product Group management system",
     'depends' : ['base','contacts','sale_management','purchase'],
     'data' : [
+        'security/group.xml',
+        'security/ir.model.access.csv',
         'views/product_group.xml',
         'views/purchase_order.xml',
         'views/wizad.xml',
