@@ -69,16 +69,15 @@ class ProductTemplateInherit(models.Model):
                 default='1', string='Rating')
 
 
-# class ResPartnerInherit(models.Model):
-#     _inherit = 'res.partner'
 
-#     email_custom = fields.Char(string='Email')
+class ResPartnerNew(models.Model):
+    _inherit = "res.partner"
 
-#     @api.onchange('email_custom')
-#     def validate_mail(self):
-#         if self.email_custom:
-#             match = re.match('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$', self.email_custom)
-#             if match == None:
-#                 raise ValidationError('Not a valid E-mail ID')
+    @api.onchange('email')
+    def validate_mail(self):
+        if self.email:
+            match = re.match('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@gmail.com', self.email)
+            if match == None:
+                raise ValidationError('Not a valid E-mail ID')
 
 
